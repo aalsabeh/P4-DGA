@@ -1737,6 +1737,67 @@ control SwitchEgress(
         }
         size = NUM_STATIC_BIGRAMS;
     }
+
+    table static_bigram_p8_1  {
+        key = {
+            headers.q1_part8.isValid(): exact;
+            headers.q1_part8.part[15:0]: exact;
+        }
+        actions = {
+            map_ngram_hdr;
+        }
+        size = NUM_STATIC_BIGRAMS;
+    }
+    table static_bigram_p8_2  {
+        key = {
+            headers.q1_part8.isValid(): exact;
+            headers.q1_part8.part[23:8]: exact;
+        }
+        actions = {
+            map_ngram_hdr;
+        }
+        size = NUM_STATIC_BIGRAMS;
+    }
+    table static_bigram_p8_3  {
+        key = {
+            headers.q1_part8.isValid(): exact;
+            headers.q1_part8.part[31:16]: exact;
+        }
+        actions = {
+            map_ngram_hdr;
+        }
+        size = NUM_STATIC_BIGRAMS;
+    }
+    table static_bigram_p8_4  {
+        key = {
+            headers.q1_part8.isValid(): exact;
+            headers.q1_part8.part[39:24]: exact;
+        }
+        actions = {
+            map_ngram_hdr;
+        }
+        size = NUM_STATIC_BIGRAMS;
+    }
+    table static_bigram_p8_5  {
+        key = {
+            headers.q1_part8.isValid(): exact;
+            headers.q1_part8.part[47:32]: exact;
+        }
+        actions = {
+            map_ngram_hdr;
+        }
+        size = NUM_STATIC_BIGRAMS;
+    }
+    table static_bigram_p8_6  {
+        key = {
+            headers.q1_part8.isValid(): exact;
+            headers.q1_part8.part[55:40]: exact;
+        }
+        actions = {
+            map_ngram_hdr;
+        }
+        size = NUM_STATIC_BIGRAMS;
+    }
     
     // ************************************************************ DNS and IP register ************************************************************
     // ************************************************************      Start        ************************************************************
@@ -1846,63 +1907,25 @@ control SwitchEgress(
                 full_labels[55:24] = headers.q1_part4.part;
                 H_full_labels.apply(eg_md.recirculate_metadata.hash_concat_hashes, full_labels);
 
-
-                static_bigram_p2.apply();
-                static_bigram_p4_1.apply();
-                static_bigram_p4_2.apply();
-                static_bigram_p4_3.apply();
-                static_bigram_p1p2.apply();
-                if (! headers.q1_part2.isValid()){
-                    static_bigram_p1p4.apply();
-                }
-                else {
-                    static_bigram_p2p4.apply();
-                }
-                
-                
-                /*
-                if (headers.label1.label_len == 3){
-                    // if first time recirculated, bigram must calculate ab, bc 
-                    // if n+1 time recirculated, bigram must caclculate only bc
-                    static_ngram3.apply();
-                }
-                else if (headers.label1.label_len >= 4 &&headers.label1.label_len < 8){
-                    // if first time recirculated, bigram must calculate ab, bc 
-                    // if n+1 time recirculated, bigram must caclculate only bc
-                    static_ngram4_1.apply();
-                    static_ngram4_2.apply();
-
-                    if (headers.label1.label_len == 5){
-                        static_ngram5_1.apply();
+                if (headers.label1.label_len <= 7) {
+                    static_bigram_p2.apply();
+                    static_bigram_p4_1.apply();
+                    static_bigram_p4_2.apply();
+                    static_bigram_p4_3.apply();
+                    static_bigram_p1p2.apply();
+                    if (! headers.q1_part2.isValid()){
+                        static_bigram_p1p4.apply();
                     }
-                    else if (headers.label1.label_len == 6){
-                        static_ngram6_1.apply();
-                        static_ngram6_2.apply();
-                    }
-                    else if (headers.label1.label_len == 7){
-                        static_ngram7_1.apply();
-                        static_ngram7_2.apply();
-                        static_ngram7_3.apply();
+                    else {
+                        static_bigram_p2p4.apply();
                     }
                 }
-                // else if (headers.label1.label_len >= 8){
-                     
-                //     // if first time recirculated, bigram must calculate ab, bc 
-                //     // if n+1 time recirculated, bigram must caclculate only bc
-                //     static_ngram8_1.apply();
-                //     static_ngram8_2.apply();
-                //     static_ngram8_3.apply();
-                //     static_ngram8_4.apply();
-                //     static_ngram8_5.apply();
-                //     static_ngram8_6.apply();
-
-                    
-                //     // if (headers.label1.label_len == 9){
-                //     //     static_ngram9.apply();
-                //     // }
-                    
+                // else if (headers.label1.label_len == 8) {
+                //     static_bigram_p8_1.apply();
+                //     static_bigram_p8_2.apply();
+                //     static_bigram_p8_3.apply();
                 // }
-                */
+                             
                 
                 // set invalid headers
                 headers.q1_part1.setInvalid();
