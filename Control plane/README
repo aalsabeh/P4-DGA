@@ -1,0 +1,25 @@
+To run the program
+
+1- Open Linux terminal and write the command: (to set up the environment and compile the P4 program) 
+	> . ./enviroment.sh -p /home/lubuntu/DNS_extension/DNS_filter.p4 -c 1
+
+2- Run tofino model:
+	> ./run_tofino_model.sh -p DNS_filter
+
+3- Open a new Linux terminal start the switch daemon:
+	>  . ./enviroment.sh -p /home/lubuntu/DNS_extension/DNS_filter.p4 -c 0
+	>   ./run_switchd.sh -p DNS_filter
+
+4- To run control plane python 3 (acting as a server)
+	- Open a new terminal
+	- Navigate : cd ~/DNS_extension2/CP/
+	- Run: python3 ./py3_cp.py
+
+5- Open a new Linux terminal and run bf_shel to load the stati_bigram tables:
+	> ./run_bfshell.sh --no-status-srv -i -b ~/DNS_extension/cp.py
+
+6- Open a terminal (split vertically for recv and send)
+	On left, >cd DNS_extension; sudo su; python3 ./recv.py veth3
+	On right, >cd DNS_extension; sudo su; python3 ./send.py 192.168.200.11
+
+7- 
