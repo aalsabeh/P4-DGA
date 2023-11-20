@@ -1,4 +1,6 @@
 # P4-DGA
+## Source code for the paper "On DGA Detection and Classification using P4 Programmable Switches"
+
 P4-DGA
 
 Files and their description:
@@ -7,3 +9,4 @@ Files and their description:
     - Populates the data plane with the bigram frequency values and other rule entries
     - Reads the features from the data plane via message digests
     - Can interface with another program that runs the ML models to enhance the detection, and perform classification of the DGAs
+  - ML directory: contains datasets used in the paper under the directory "Datasets". Also, the jupyter notebook "ML.ipynb" contains the classifier that loads the data, performs detection and classification, and reports the accuracies. It is run on a CPU Windows machine.
