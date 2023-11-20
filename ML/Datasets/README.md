@@ -13,3 +13,6 @@ Dataset files description:
 	- Github Dataset/Ngram Scores/: contains files that compute the bigrams and their corresponding frequency values based on the English dictionary and the Top 1m domains.
  
 	- Github Dataset/Others/: contains files for the English dictionary, Top 1m domains, and the all Top-level Domains (TLDs).
+
+	- Github Dataset/Pcaps/: contains PCAP files of DGAs and CTU. DGA malware samples were collected from different sources and run in Cuckoo sandbox. CTU pcaps were obtained from the CTU_13 dataset, but we did the data processing to include DNS packets and remove the IPs of infected hosts.
+
