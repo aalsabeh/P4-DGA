@@ -10,3 +10,14 @@ Files and their description:
     - Reads the features from the data plane via message digests
     - Can interface with another program that runs the ML models to enhance the detection, and perform classification of the DGAs
   - ML directory: contains datasets used in the paper under the directory "Datasets". Also, the jupyter notebook "ML.ipynb" contains the classifier that loads the data, performs detection and classification, and reports the accuracies. It is run on a CPU Windows machine.
+
+Please, if you use the published code/dataset, cite our work:
+@article{alsabeh2024dga,
+  title={On dga detection and classification using p4 programmable switches},
+  author={AlSabeh, Ali and Friday, Kurt and Kfoury, Elie and Crichigno, Jorge and Bou-Harb, Elias},
+  journal={Computers \& Security},
+  volume={145},
+  pages={104007},
+  year={2024},
+  publisher={Elsevier}
+}
